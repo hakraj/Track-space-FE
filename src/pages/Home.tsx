@@ -44,7 +44,7 @@ const Home = () => {
             contribute swiftly and efficiently to the growth of your team.
           </p>
         </div>
-        <div className="ml-auto max-md:my-4 w-fit rounded-full p-2 bg-[#ffffff11] backdrop-filter shadow-md shadow-violet-300/50">
+        <div className=" mx-auto md:ml-auto max-md:my-4 w-fit rounded-full p-2 bg-[#ffffff11] backdrop-filter shadow-md shadow-violet-300/50">
           <img className="rounded-full size-[256px] lg:size-[400px]" src={Images.product} alt="" />
         </div>
       </div>
@@ -107,7 +107,7 @@ const Home = () => {
           <button type='button' className=' font-ubuntu my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-white'> Check our blog </button>
 
         </div>
-        <div className="ml-auto max-md:my-4 w-fit rounded-full p-2 bg-[#ffffff11] backdrop-filter shadow-md shadow-violet-300/50">
+        <div className="mx-auto ml-auto max-md:my-4 w-fit rounded-full p-2 bg-[#ffffff11] backdrop-filter shadow-md shadow-violet-300/50">
           <img className="rounded-full size-[256px] lg:size-[400px]" src={Images.blog} alt="" />
         </div>
 

@@ -3,7 +3,7 @@
 const Contact = () => {
   return (
     <>
-      <div className="flex flex-col justify-center items-center min-h-screen max-w-xs md:max-w-sm mx-auto">
+      <div className="flex flex-col justify-center items-center min-h-screen max-w-sm md:max-w-md mx-auto">
         <div className="w-full text-center mt-[10vh] mb-[20vh]  bg-[#ffffff11] backdrop-filter md:rounded-[2.5rem] shadow-md shadow-violet-300/50 rounded-2xl p-4 lg:p-8 drop-shadow-lg">
           <div className=" flex items-center justify-center glow ">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6 md:size-8 mr-1">
