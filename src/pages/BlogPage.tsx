@@ -1,11 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import Images from "../assets/images/Image";
 
 const BlogPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="px-[10vw] mt-[15vh] mb-[25vh]">
       <div className="md:flex gap-[2.5%]">
         <div className='md:hidden w-4/5 mx-auto p-1 mb-[5vh] bg-[#ffffff11] backdrop-filter rounded-2xl shadow-md shadow-violet-300/50'>
           <img className='w-full h-auto rounded-2xl' src={Images.firstblog} alt='' />
+        </div>
+        <div onClick={() => navigate(-1)} className="max-md:hidden flex items-center justify-center bg-black/50 hover:bg-[#ffffff11] backdrop-filter cursor-pointer z-[1000] size-10 rounded-full text-slate-200">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
         </div>
         <div className="max-md:hidden self-center">
           <div>

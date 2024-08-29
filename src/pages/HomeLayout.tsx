@@ -7,8 +7,8 @@ const Layout = () => {
 
   return (
     <div className="dark: relative light:absolute light:top-0 light:-z-10 h-full w-full dark: bg-slate-950 light:bg-white">
-      <div className="dark: absolute bottom-0 left-[-15%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.2),rgba(255,255,255,0))]"></div>
-      <div className="dark: absolute bottom-0 right-[5%] top-[10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.2),rgba(255,255,255,0))]"></div>
+      <div className="dark: absolute bottom-0 left-[-15%] right-0 top-[-10%] h-[500px] w-[500px] max-md:size-[80vh] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.2),rgba(255,255,255,0))]"></div>
+      <div className="dark: absolute bottom-0 right-[5%] top-[10%] h-[500px] w-[500px] max-md:size-[80vh] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.2),rgba(255,255,255,0))]"></div>
       {/* <div className="light: hidden absolute bottom-auto left-[-5%] right-auto top-[-20%] h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]"></div>
       <div className="light: hidden absolute bottom-auto left-auto right-[-5%] top-0 h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]"></div> */}
       <nav className='flex justify-between items-center py-4 px-[5vw] dark: text-slate-300 light:text-slate-700 '>
@@ -72,7 +72,10 @@ const Layout = () => {
               </div>
             </div>
           }
-          <svg onClick={() => setIsDropdown(true)} className="cursor-pointer size-6 md:size-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" >
+          <svg onClick={() => {
+            console.log(isDropdown);
+            setIsDropdown(!isDropdown);
+          }} className="cursor-pointer size-6 md:size-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" >
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
         </div>
@@ -115,7 +118,7 @@ const Layout = () => {
             </div>
             <div className="grid grid-cols-3 gap-[5%]">
               <div className="flex flex-col gap-4">
-                <Link className="hover:text-violet-300" to='/home'> Home </Link>
+                <Link className="hover:text-violet-300" to='/'> Home </Link>
                 <Link className="hover:text-violet-300" to='/#product'>Product </Link>
                 <Link className="hover:text-violet-300" to='/blog'> Blog </Link>
                 <Link className="hover:text-violet-300" to='/contact'> Contact </Link>
