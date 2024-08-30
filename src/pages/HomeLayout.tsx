@@ -1,19 +1,20 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 
 const Layout = () => {
   const [isDropdown, setIsDropdown] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="dark: relative light:absolute light:top-0 light:-z-10 h-full w-full dark: bg-slate-950 light:bg-white">
-      <div className="dark: absolute bottom-0 left-[-15%] right-0 top-[-10%] h-[500px] w-[500px] max-md:size-[80vh] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.2),rgba(255,255,255,0))]"></div>
-      <div className="dark: absolute bottom-0 right-[5%] top-[10%] h-[500px] w-[500px] max-md:size-[80vh] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.2),rgba(255,255,255,0))]"></div>
+      <div className="dark: absolute bottom-0 left-[-15%] max-md:left-[10%] max-md:top-[5%] right-auto top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.2),rgba(255,255,255,0))]"></div>
+      <div className="dark: absolute bottom-0 left-auto right-[5%] top-[10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.2),rgba(255,255,255,0))]"></div>
       {/* <div className="light: hidden absolute bottom-auto left-[-5%] right-auto top-[-20%] h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]"></div>
       <div className="light: hidden absolute bottom-auto left-auto right-[-5%] top-0 h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]"></div> */}
       <nav className='flex justify-between items-center py-4 px-[5vw] dark: text-slate-300 light:text-slate-700 '>
         <Link to="/" className=" flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6 md:size-8 mr-1">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className=" text-violet-500 size-6 md:size-8 mr-1">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
           </svg>
@@ -64,8 +65,8 @@ const Layout = () => {
                 </div>
                 <div className=' absolute bottom-[5vh] w-full'>
                   <div className='flex flex-col justify-center items-center gap-4' >
-                    <button type='button' className=' font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Login </button>
-                    <button type='button' className=' font-ubuntu bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-slate-200'> Sign up </button>
+                    <button onClick={() => navigate('/login')} type='button' className=' font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Login </button>
+                    <button onClick={() => navigate('/signup')} type='button' className=' font-ubuntu bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-slate-200'> Sign up </button>
                   </div>
                   <p className="font-ubuntu text-center text-xs text-slate-500 font-light my-4">© 2024 Track-space Inc.</p>
                 </div>
@@ -86,19 +87,19 @@ const Layout = () => {
           <Link className="hover:text-violet-300" to='/contact'> Contact </Link>
         </div>
         <div className='hidden md:flex items-center gap-4'>
-          <button type='button' className=' font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Login </button>
-          <button type='button' className=' font-ubuntu bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-slate-200'> Sign up </button>
+          <button onClick={() => navigate('/login')} type='button' className=' font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Login </button>
+          <button onClick={() => navigate('/signup')} type='button' className=' font-ubuntu bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-slate-200'> Sign up </button>
         </div>
       </nav>
-      <main className=' max-w-screen-2xl mx-auto '>
+      <main className=' max-w-screen-2xl mx-auto relative z-10'>
         <Outlet />
       </main>
       <footer className="border-t border-slate-800">
         <div className=" px-[5vw]">
-          <nav className=" min-h-[40vh] flex max-md:flex-col max-md:gap-8 justify-between py-8 dark: text-slate-200 light:text-slate-800">
+          <nav className=" min-h-[40vh] flex max-md:flex-col max-md:gap-8 justify-between py-8 dark: text-slate-300 light:text-slate-700">
             <div>
               <Link to="/" className=" flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6 md:size-8 mr-1">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="text-violet-500 size-6 md:size-8 mr-1">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
                 </svg>
@@ -136,7 +137,7 @@ const Layout = () => {
               </div>
             </div>
             <div className="flex flex-col justify-between items-end">
-              <button type='button' className=' font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Contact us </button>
+              <button onClick={() => navigate('/contact')} type='button' className=' font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Contact us </button>
               <p className="font-ubuntu text-xs text-slate-500 font-light my-2">© 2024 Track-space Inc.</p>
             </div>
           </nav>

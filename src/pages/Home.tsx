@@ -1,13 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import Images from "../assets/images/Image";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
       {/* INTRO */}
       <div className=' text-center pt-[10vh] pb-[15vh] md:pt-[15vh] md:pb-[20vh] px-[5vw]'>
         <h1 className=' font-ubuntu text-5xl md:text-6xl font-bold dark: text-slate-200 light:text-slate-800'>Home for all techies</h1>
         <p className=' md:text-xl md:px-[30%] font-normal my-4 text-slate-500'>Revolutionizing workspace for developer, team, project manager and other professionals and clients </p>
-        <button type='button' className=' font-ubuntu my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-white'> Get started </button>
+        <button onClick={() => navigate('/signup')} type='button' className=' font-ubuntu my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-white'> Get started </button>
         <p className='font-ubuntu text-sm dark: text-slate-300 light:text-slate-700 font-light'>Already have an account? <span className='dark: text-sky-200 light:text-sky-500 hover:underline cursor-pointer'><a href='/login'>Login</a></span></p>
 
         <div className='w-4/5 lg:w-3/5 mt-[7.5vw] mx-auto p-2 bg-[#ffffff11] backdrop-filter rounded-2xl shadow-md shadow-violet-300/50'>
@@ -104,7 +106,7 @@ const Home = () => {
             Stay ahead with Trackspace’s comprehensive insights, designed to keep you informed at every stage of your projects.
             Our platform offers real-time updates, detailed analytics, and actionable data, helping you make informed decisions and anticipate challenges.
           </p>
-          <button type='button' className=' font-ubuntu my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-white'> Check our blog </button>
+          <button onClick={() => navigate('/blog')} type='button' className=' font-ubuntu my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-white'> Check our blog </button>
 
         </div>
         <div className="mx-auto ml-auto max-md:my-4 w-fit rounded-full p-2 bg-[#ffffff11] backdrop-filter shadow-md shadow-violet-300/50">
