@@ -120,7 +120,7 @@ const Home = () => {
         <span className="pointer-events-none absolute top-0 block aspect-square w-[400%] rounded-full shadow-[0px_0px_16px_0px_rgba(196,181,253,0.40)_inset,0px_0px_80px_0px_rgba(196,181,253,0.60)_inset,0px_0px_160px_0px_rgba(196,181,253,0.20)_inset]"></span>
         <div className="py-8 px-[5vw]">
           <h1 className=' font-ubuntu text-4xl md:text-5xl font-bold dark: text-slate-200 light:text-slate-800'>Enhance your workflow <br />with trackspace today</h1>
-          <button type='button' className=' font-ubuntu my-8 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-white'> Get started for free </button>
+          <button onClick={() => navigate('/auth/signup')} type='button' className=' font-ubuntu my-8 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-white'> Get started for free </button>
         </div>
       </div>
     </>

@@ -43,10 +43,10 @@ const Login = () => {
             </button>
           </form>
 
-          <p className="font-ubuntu font-light max-sm:text-sm mt-1">
+          <p className="font-ubuntu font-light max-sm:text-sm mt-1 text-slate-400">
             Don't have an account?
             <span className="text-sky-400 underline cursor-pointer">
-              <a href="/login">Signup</a>
+              <a href="/auth/signup">Signup</a>
             </span>
           </p>
 

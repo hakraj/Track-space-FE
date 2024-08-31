@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Auth from './pages/Auth';
 import Reset from './pages/Reset';
 import Signup from './pages/Signup';
+import Onboard from './pages/Onboard';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/auth' element={<Auth />}>
           <Route path='/auth/login' element={<Login />} />
           <Route path='/auth/signup' element={<Signup />} />
+          <Route path='/auth/onboarding' element={<Onboard />} />
           <Route path='/auth/reset' element={<Reset />} />
         </Route>
         {/* <Route path='explore' element={<Explore />} />

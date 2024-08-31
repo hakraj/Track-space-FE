@@ -54,7 +54,7 @@ const Signup = () => {
           <p className="font-ubuntu font-light max-sm:text-sm mt-1">
             Already have an account?
             <span className="text-sky-400 underline cursor-pointer">
-              <a href="/login">Login</a>
+              <a href="/auth/login">Login</a>
             </span>
           </p>
         </div>
