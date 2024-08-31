@@ -45,7 +45,7 @@ const Reset = () => {
             </div>
             <button
               type="submit"
-              className=" font-ubuntu w-full my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-lg text-white"
+              className=" font-ubuntu w-full my-6 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-lg text-white"
             >
               Reset password
             </button>

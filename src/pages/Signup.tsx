@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="flex flex-col justify-center items-center min-h-screen max-w-xs md:max-w-md mx-auto">
@@ -33,17 +36,18 @@ const Signup = () => {
                   id="password"
                 />
               </label>
-              <label className=" flex gap-4" htmlFor="terms">
+              <label className=" flex justify-start items-start gap-4 my-4" htmlFor="terms">
                 <input
                   type="checkbox"
-                  className="mb-3 mt-1 block w-full p-2 border border-gray-300 rounded-lg text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 focus:invalid:border-red-500 focus:invalid:ring-red-500 bg-white"
+                  className="mb-3 mt-1 block p-2 border border-gray-300 rounded-lg text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 focus:invalid:border-red-500 focus:invalid:ring-red-500 bg-white"
                   id="terms"
                 />
-                <span className=" font-normal text-sm text-violet-300">By signing up, you confirm that you have read and accept our Terms of service and Conditions</span>
+                <span className=" font-normal text-xs text-violet-300">By signing up, you confirm that you have read and accept our Terms of service and Conditions</span>
               </label>
             </div>
 
             <button
+              onClick={() => navigate("/auth/onboarding")}
               type="submit"
               className=" font-ubuntu w-full my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-lg text-white"
             >
@@ -51,10 +55,10 @@ const Signup = () => {
             </button>
           </form>
 
-          <p className="font-ubuntu font-light max-sm:text-sm mt-1">
+          <p className="font-ubuntu font-light max-sm:text-sm mt-1 text-slate-400">
             Already have an account?
             <span className="text-sky-400 underline cursor-pointer">
-              <a href="/auth/login">Login</a>
+              <a href="/auth/login"> Login</a>
             </span>
           </p>
         </div>

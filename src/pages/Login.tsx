@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="flex flex-col justify-center items-center min-h-screen max-w-xs md:max-w-md mx-auto">
@@ -34,8 +37,9 @@ const Login = () => {
                 />
               </label>
             </div>
-            <p className="text-sky-400 text-sm">Forgotten password?</p>
+            <p className="text-sky-400 text-sm underline cursor-pointer"><a href="/auth/reset">Forgotten password?</a></p>
             <button
+              onClick={() => navigate("/auth/onboarding")}
               type="submit"
               className=" font-ubuntu w-full my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-lg text-white"
             >
@@ -46,7 +50,7 @@ const Login = () => {
           <p className="font-ubuntu font-light max-sm:text-sm mt-1 text-slate-400">
             Don't have an account?
             <span className="text-sky-400 underline cursor-pointer">
-              <a href="/auth/signup">Signup</a>
+              <a href="/auth/signup"> Signup</a>
             </span>
           </p>
 
