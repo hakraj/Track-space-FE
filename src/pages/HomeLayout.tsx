@@ -8,8 +8,8 @@ const Layout = () => {
 
   return (
     <div className="dark: relative light:absolute light:top-0 light:-z-10 h-full w-full dark: bg-slate-950 light:bg-white">
-      <div className="dark: absolute bottom-0 left-[-15%] max-md:left-[10%] max-md:top-[5%] right-auto top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.2),rgba(255,255,255,0))]"></div>
-      <div className="dark: absolute bottom-0 left-auto right-[5%] top-[10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.2),rgba(255,255,255,0))]"></div>
+      <div className="dark: absolute bottom-0 left-[-15%] max-md:left-[10%] max-md:top-[5%] right-auto top-[-10%] h-[500px] w-[500px] max-md:size-[75vw] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.2),rgba(255,255,255,0))]"></div>
+      <div className="dark: absolute bottom-0 left-auto right-[5%] top-[10%] h-[500px] w-[500px] max-md:size-[75vw] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.2),rgba(255,255,255,0))]"></div>
       {/* <div className="light: hidden absolute bottom-auto left-[-5%] right-auto top-[-20%] h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]"></div>
       <div className="light: hidden absolute bottom-auto left-auto right-[-5%] top-0 h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]"></div> */}
       <nav className='flex justify-between items-center py-4 px-[5vw] dark: text-slate-300 light:text-slate-700 '>
@@ -65,8 +65,8 @@ const Layout = () => {
                 </div>
                 <div className=' absolute bottom-[5vh] w-full'>
                   <div className='flex flex-col justify-center items-center gap-4' >
-                    <button onClick={() => navigate('/login')} type='button' className=' font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Login </button>
-                    <button onClick={() => navigate('/signup')} type='button' className=' font-ubuntu bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-slate-200'> Sign up </button>
+                    <button onClick={() => navigate('/auth/login')} type='button' className=' font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Login </button>
+                    <button onClick={() => navigate('/auth/signup')} type='button' className=' font-ubuntu bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-slate-200'> Sign up </button>
                   </div>
                   <p className="font-ubuntu text-center text-xs text-slate-500 font-light my-4">© 2024 Track-space Inc.</p>
                 </div>
@@ -87,8 +87,8 @@ const Layout = () => {
           <Link className="hover:text-violet-300" to='/contact'> Contact </Link>
         </div>
         <div className='hidden md:flex items-center gap-4'>
-          <button onClick={() => navigate('/login')} type='button' className=' font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Login </button>
-          <button onClick={() => navigate('/signup')} type='button' className=' font-ubuntu bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-slate-200'> Sign up </button>
+          <button onClick={() => navigate('/auth/login')} type='button' className=' font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Login </button>
+          <button onClick={() => navigate('/auth/signup')} type='button' className=' font-ubuntu bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-slate-200'> Sign up </button>
         </div>
       </nav>
       <main className=' max-w-screen-2xl mx-auto relative z-10'>
