@@ -2,3 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Sidebar */
+.grid-container {
+  display: grid;
+  grid-template-columns: 256px 1fr 1fr 1fr;
+  grid-template-rows: 0.2fr 2.25fr;
+  grid-template-areas: 
+  'sidebar header header header'
+  'sidebar main main main';
+}
+
+header {
+  grid-area: header;
+}
+
+/* Sidebar */
+#sidebar {
+  grid-area: sidebar;
+}
+
+.item  svg {
+  display: inline;
+  margin: 1rem;
+
+}
+
+#main {
+  grid-area: main;
+}

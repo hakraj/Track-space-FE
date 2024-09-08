@@ -9,6 +9,8 @@ import Auth from './pages/Auth';
 import Reset from './pages/Reset';
 import Signup from './pages/Signup';
 import Onboard from './pages/Onboard';
+import Dashboard from './pages/Dashboard';
+import DashboardHome from './pages/DashboardHome';
 
 function App() {
   return (
@@ -27,6 +29,10 @@ function App() {
           <Route path='/auth/onboarding' element={<Onboard />} />
           <Route path='/auth/reset' element={<Reset />} />
         </Route>
+        <Route path='/dashboard' element={<Dashboard />}>
+          <Route path='/dashboard/home' element={<DashboardHome />} />
+        </Route>
+
         {/* <Route path='explore' element={<Explore />} />
         <Route path='blog' element={<Blog />} />
         <Route path='/blog/:id' element={<BlogPage />} /> */}

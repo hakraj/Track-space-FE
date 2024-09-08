@@ -1,8 +1,56 @@
+import axios from "axios";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
 const Signup = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const [agreeTerms, setAgreeTerms] = useState(false)
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    phone_number: "",
+    profession: ""
+  })
+  const [error, setError] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    phone_number: "",
+    profession: "",
+    terms: false,
+  })
+
+  const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setFormData({
+      ...formData, [e.target.name]: e.target.value,
+    });
+  }
+
+  const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+
+    if (!agreeTerms) {
+      setError({
+        ...error, ["terms"]: true
+      })
+      return console.error("user yet to agree to terms and condition:")
+    }
+
+    try {
+      console.log(formData);
+
+      await axios.post('https://track-space.onrender.com/sign-up', JSON.stringify(formData))
+        .then(response => console.log(response))
+    } catch (error) {
+      console.error("An unepected error occured:", error)
+    }
+
+
+  }
 
   return (
     <>
@@ -18,22 +66,89 @@ const Signup = () => {
           <h1 className="text-3xl lg:text-4xl font-ubuntu font-bold my-6 text-slate-200 light:text-slate-800">
             Create your account
           </h1>
-          <form className="text-left">
+          <form className="text-left" onSubmit={handleFormSubmit}>
             <div>
-              <label htmlFor="firstname">
+              <div className=" flex items-center justify-between gap-4 md:gap-8">
+                <label htmlFor="firstname">
+                  <span className=" font-normal text-sm text-violet-300">Firstname</span>
+                  <input
+                    className="mb-3 mt-1 block w-full p-2 border border-gray-300 rounded-lg text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 focus:invalid:border-red-500 focus:invalid:ring-red-500 bg-white"
+                    placeholder="John"
+                    id="firstname"
+                    name="first_name"
+                    type="text"
+                    required
+                    minLength={3}
+                    value={formData.first_name}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <label htmlFor="lastname">
+                  <span className=" font-normal text-sm text-violet-300">Lastname</span>
+                  <input
+                    className="mb-3 mt-1 block w-full p-2 border border-gray-300 rounded-lg text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 focus:invalid:border-red-500 focus:invalid:ring-red-500 bg-white"
+                    placeholder="Doe"
+                    id="lastname"
+                    name="last_name"
+                    type="text"
+                    required
+                    minLength={3}
+                    value={formData.last_name}
+                    onChange={handleInputChange}
+                  />
+                </label>
+              </div>
+              <label htmlFor="email">
                 <span className=" font-normal text-sm text-violet-300">Email</span>
                 <input
                   className="mb-3 mt-1 block w-full p-2 border border-gray-300 rounded-lg text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 focus:invalid:border-red-500 focus:invalid:ring-red-500 bg-white"
                   placeholder="Enter your email"
                   id="email"
+                  name="email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={handleInputChange}
                 />
               </label>
-              <label htmlFor="firstname">
+              <label htmlFor="password">
                 <span className=" font-normal text-sm text-violet-300">Password</span>
                 <input
                   className="mb-3 mt-1 block w-full p-2 border border-gray-300 rounded-lg text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 focus:invalid:border-red-500 focus:invalid:ring-red-500 bg-white"
                   placeholder="Enter your password"
                   id="password"
+                  name="password"
+                  type="password"
+                  required
+                  minLength={8}
+                  value={formData.password}
+                  onChange={handleInputChange}
+                />
+              </label>
+              <label htmlFor="profession">
+                <span className=" font-normal text-sm text-violet-300">Profession</span>
+                <input
+                  className="mb-3 mt-1 block w-full p-2 border border-gray-300 rounded-lg text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 focus:invalid:border-red-500 focus:invalid:ring-red-500 bg-white"
+                  id="profession"
+                  name="profession"
+                  type="text"
+                  required
+                  minLength={3}
+                  value={formData.profession}
+                  onChange={handleInputChange}
+                />
+              </label>
+              <label htmlFor="phone">
+                <span className=" font-normal text-sm text-violet-300">Phone</span>
+                <input
+                  className="mb-3 mt-1 block w-full p-2 border border-gray-300 rounded-lg text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 focus:invalid:border-red-500 focus:invalid:ring-red-500 bg-white"
+                  id="phone"
+                  name="phone_number"
+                  type="text"
+                  required
+                  minLength={3}
+                  value={formData.phone_number}
+                  onChange={handleInputChange}
                 />
               </label>
               <label className=" flex justify-start items-start gap-4 my-4" htmlFor="terms">
@@ -41,13 +156,15 @@ const Signup = () => {
                   type="checkbox"
                   className="mb-3 mt-1 block p-2 border border-gray-300 rounded-lg text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 focus:invalid:border-red-500 focus:invalid:ring-red-500 bg-white"
                   id="terms"
+                  checked={agreeTerms}
+                  onChange={() => setAgreeTerms(!agreeTerms)}
                 />
                 <span className=" font-normal text-xs text-violet-300">By signing up, you confirm that you have read and accept our Terms of service and Conditions</span>
               </label>
             </div>
 
             <button
-              onClick={() => navigate("/auth/onboarding")}
+              // onClick={() => navigate("/auth/onboarding")}
               type="submit"
               className=" font-ubuntu w-full my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-lg text-white"
             >

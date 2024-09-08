@@ -12,6 +12,7 @@ const Images = {
   feature4: new URL('./feature-4.jpg', import.meta.url).href,
   blog: new URL('./blog.jpg', import.meta.url).href,
   firstblog: new URL('./blog01.jpg', import.meta.url).href,
+  notfound: new URL('./not-found.svg', import.meta.url).href,
 }
 
 export default Images;
