@@ -1,8 +1,15 @@
+import { useState } from "react"
 import { Link, Outlet } from "react-router-dom"
 
-const Header = () => {
+const Header = ({ openSidebar }: { openSidebar: () => void }) => {
   return (
     <header className="flex justify-between items-center py-4 px-[5%] h-fit dark: text-slate-200 light:text-slate-700 shadow-md">
+      <div className="md:hidden" onClick={openSidebar}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+
+      </div>
       <div className="relative">
         <input className="  py-1 pl-4 pr-8 rounded-2xl font-light text-sm bg-transparent border border-violet-400 focus:outline-violet-500" type="text" name="search" id="search" placeholder="search keywords" />
         <button className="border-0 bg-transparent w-0 h-0" type="submit">
@@ -27,10 +34,10 @@ const Header = () => {
   )
 }
 
-const Sidebar = () => {
+const Sidebar = ({ openSidebar, openSidebarToggle }: { openSidebar: () => void, openSidebarToggle: boolean }) => {
   return (
-    <aside id="sidebar" className=" h-screen overflow-y-auto dark: text-slate-200 light:text-slate-700 shadow-md">
-      <div className="p-[5%]">
+    <aside id="sidebar" className={`h-screen overflow-y-auto dark: text-slate-200 light:text-slate-700 shadow-md ${openSidebarToggle && 'sidebar-res bg-[#000000ff] backdrop-filter w-3/5 px-[5%]'}`}>
+      <div className="p-[5%] flex items-center justify-between">
         <div className=" flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className=" text-violet-500 size-6 md:size-8 mr-1">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
@@ -38,8 +45,8 @@ const Sidebar = () => {
           </svg>
           <p className='logo text-lg md:text-xl font-bold font-mono'>Track-space</p>
         </div>
-        <div className="hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+        <div className="md:hidden" onClick={openSidebar}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-red-500">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
           </svg>
         </div>
@@ -100,6 +107,12 @@ const Sidebar = () => {
 
 
 const Dashboard = () => {
+  const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
+
+  const openSidebar = () => {
+    setOpenSidebarToggle(!openSidebarToggle)
+  }
+
   return (
     <div className="dark: relative light:absolute light:top-0 light:-z-10 h-full w-full dark: bg-slate-950 light:bg-white">
       <div className="dark: absolute bottom-0 left-[-15%] max-md:left-[10%] max-md:top-[5%] right-auto top-[-10%] h-[500px] w-[500px] max-md:size-[80vw] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.2),rgba(255,255,255,0))]"></div>
@@ -107,9 +120,9 @@ const Dashboard = () => {
       {/* <div className="light: hidden absolute bottom-auto left-[-5%] right-auto top-[-20%] h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]"></div>
       <div className="light: hidden absolute bottom-auto left-auto right-[-5%] top-0 h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]"></div> */}
       <main className=' max-w-screen-2xl h-screen mx-auto z-10 grid-container'>
-        <Header />
-        <Sidebar />
-        <div id="main" className=" overflow-y-auto mr-2 mb-2 dark: text-slate-300 light:text-slate-700">
+        <Header openSidebar={openSidebar} />
+        <Sidebar openSidebarToggle={openSidebarToggle} openSidebar={openSidebar} />
+        <div id="main" className=" overflow-y-auto h-full flex flex-col mr-2 mb-2 dark: text-slate-300 light:text-slate-700">
           <Outlet />
         </div>
       </main>

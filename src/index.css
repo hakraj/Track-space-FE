@@ -30,3 +30,28 @@ header {
 #main {
   grid-area: main;
 }
+
+.sidebar-res {
+  display: inline !important;
+  position: absolute;
+  z-index: 100;
+}
+
+.content {
+  flex: 1 1 auto;
+}
+
+@media screen and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    'header'
+    'main';
+  }
+
+  #sidebar {
+    display: none;
+  }
+
+
+}
