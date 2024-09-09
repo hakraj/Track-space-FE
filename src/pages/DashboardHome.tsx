@@ -1,8 +1,13 @@
-import Images from "../assets/images/Image";
+// import Images from "../assets/images/Image";
 
-const DashboardHome = () => {
+const DashboardHome = ({ today }: { today: string }) => {
 
-  const today = new Date().toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+
+  const data = [
+    { title: "Project 1", author: ["Hakeem", "Yusuf"], dateCreated: today, status: "Completed" },
+    { title: "Article 1", author: ["Yusuf"], dateCreated: today, status: "Completed" },
+    { title: "Project 2", author: ["Hakeem"], dateCreated: today, status: "Pending" },
+  ]
   return (
     <>
       <div className="bg-[#ffffff11] backdrop-filter rounded-2xl px-[5%] py-4 md:py-8">
@@ -26,12 +31,12 @@ const DashboardHome = () => {
               Create project
             </button>
           </div>
-          <div className=" flex items-center gap-4 md:gap-8 m- md:m-4 ">
-            <div>Total <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
-            <div>Article <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
-            <div>Code <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
-            <div>Text <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
-            <div>To-do <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
+          <div className=" flex items-center gap-4 md:gap-6 m- md:m-4 ">
+            <div className="tag p-1">Total <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
+            <div className="tag p-1">Article <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
+            <div className="tag p-1">Code <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
+            <div className="tag p-1">Text <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
+            <div className="tag p-1">To-do <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
           </div>
         </div>
       </div>
@@ -66,9 +71,33 @@ const DashboardHome = () => {
           </div>
         </form>
 
-        <div className=" text-center mt-16">
+        {/* <div className=" text-center mt-16">
           <img className=" size-[25%] mx-auto" src={Images.notfound} alt="not found svg" />
           <p className=" text-slate-500">No item matches your search.</p>
+        </div> */}
+        <div>
+          <table className="w-full mt-16 text-center table-fixed ">
+            <thead>
+              <tr className="bg-slate-700">
+                <th>Name</th>
+                <th>Author</th>
+                <th>Date Created</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((val, key) => {
+                return (
+                  <tr key={key} className={key % 2 === 0 ? "" : 'bg-slate-700'}>
+                    <td>{val.title}</td>
+                    <td>{val.author}</td>
+                    <td>{val.dateCreated}</td>
+                    <td>{val.status}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
     </>

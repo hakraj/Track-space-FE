@@ -11,8 +11,11 @@ import Signup from './pages/Signup';
 import Onboard from './pages/Onboard';
 import Dashboard from './pages/Dashboard';
 import DashboardHome from './pages/DashboardHome';
+import AddProject from './pages/AddProject';
 
 function App() {
+  const today = new Date().toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+
   return (
     <BrowserRouter>
       <Routes>
@@ -30,7 +33,8 @@ function App() {
           <Route path='/auth/reset' element={<Reset />} />
         </Route>
         <Route path='/dashboard' element={<Dashboard />}>
-          <Route path='/dashboard/home' element={<DashboardHome />} />
+          <Route path='/dashboard/home' element={<DashboardHome today={today} />} />
+          <Route path='/dashboard/add' element={<AddProject today={today} />} />
         </Route>
 
         {/* <Route path='explore' element={<Explore />} />

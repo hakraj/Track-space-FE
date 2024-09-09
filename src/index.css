@@ -21,10 +21,20 @@ header {
   grid-area: sidebar;
 }
 
+.item {
+  padding: 8px;
+  margin: 8px;
+}
+
 .item  svg {
   display: inline;
-  margin: 1rem;
+  margin-right: 1rem;
+}
 
+.item:hover, .tag:hover {
+  border-radius: 8px;
+  background-color: #a78bfa;
+  cursor: pointer;
 }
 
 #main {
@@ -53,5 +63,9 @@ header {
     display: none;
   }
 
+}
 
+/* DashboardHome */
+th, td {
+  padding: 0.5rem;
 }
