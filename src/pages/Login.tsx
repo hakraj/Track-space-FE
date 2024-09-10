@@ -1,10 +1,12 @@
 import axios from "axios";
-import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../AuthProvider";
 
 
 const Login = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const { authenticated, setAuthenticated } = useContext(AuthContext)
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,11 +20,17 @@ const Login = () => {
 
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    console.log(formData);
 
 
     try {
-      await axios.post('https://track-space.onrender.com/sign-up', JSON.stringify(formData))
-        .then(response => console.log(response))
+      await axios.post('https://track-space.onrender.com/login', JSON.stringify(formData))
+        .then(response => console.log(response));
+
+      setAuthenticated(true);
+      console.log(authenticated);
+
+      return navigate('/dashboard/home')
     } catch (error) {
       console.error("An unepected error occured:", error)
     }
@@ -78,7 +86,6 @@ const Login = () => {
             </div>
             <p className="text-sky-400 text-sm underline cursor-pointer"><a href="/auth/reset">Forgotten password?</a></p>
             <button
-              // onClick={() => navigate("/auth/onboarding")}
               type="submit"
               className=" font-ubuntu w-full my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-lg text-white"
             >

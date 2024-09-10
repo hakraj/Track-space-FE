@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const Signup = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [agreeTerms, setAgreeTerms] = useState(false)
   const [formData, setFormData] = useState({
     first_name: "",
@@ -45,6 +45,7 @@ const Signup = () => {
 
       await axios.post('https://track-space.onrender.com/sign-up', JSON.stringify(formData))
         .then(response => console.log(response))
+      return navigate('/auth/login')
     } catch (error) {
       console.error("An unepected error occured:", error)
     }

@@ -38,6 +38,13 @@ const AddProject = ({ today }: { today: string }) => {
           </div>
         </div>
       </div>
+      <div className="bg-[#ffffff11] content backdrop-filter rounded-2xl px-[5%] py-4 md:py-8 mt-1">
+        <textarea className=" w-full p-2 pl-8 border border-gray-600 rounded-xl text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 bg-transparent " rows={15} />
+        <div className=" flex items-center justify-between mx-[5%] my-4">
+          <button type='button' className=' font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Back </button>
+          <button type='button' className=' font-ubuntu bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-slate-200'> Submit </button>
+        </div>
+      </div>
     </>
   )
 }
