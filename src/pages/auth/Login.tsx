@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../AuthProvider";
+import { AuthContext } from "../../AuthProvider";
 
 
 const Login = () => {
@@ -21,7 +21,6 @@ const Login = () => {
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     console.log(formData);
-
 
     try {
       await axios.post('https://track-space.onrender.com/login', JSON.stringify(formData))

@@ -4,15 +4,19 @@ import Layout from './pages/HomeLayout';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import BlogPage from './pages/BlogPage';
-import Login from './pages/Login';
-import Auth from './pages/Auth';
-import Reset from './pages/Reset';
-import Signup from './pages/Signup';
-import Onboard from './pages/Onboard';
-import Dashboard from './pages/Dashboard';
-import DashboardHome from './pages/DashboardHome';
-import AddProject from './pages/AddProject';
+import Login from './pages/auth/Login';
+import Auth from './pages/auth/Auth';
+import Reset from './pages/auth/Reset';
+import Signup from './pages/auth/Signup';
+import Onboard from './pages/auth/Onboard';
+import Dashboard from './pages/dashboard/Dashboard';
+import DashboardHome from './pages/dashboard/DashboardHome';
+import AddProject from './pages/dashboard/AddProject';
 import { AuthProvider } from './AuthProvider';
+import Todo from './pages/dashboard/Todo';
+import Projects from './pages/dashboard/Projects';
+import Schedule from './pages/dashboard/Schedule';
+import Chat from './pages/dashboard/Chat';
 
 function App() {
   const today = new Date().toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
@@ -37,6 +41,10 @@ function App() {
           <Route path='/dashboard' element={<Dashboard />}>
             <Route path='/dashboard/home' element={<DashboardHome today={today} />} />
             <Route path='/dashboard/add' element={<AddProject today={today} />} />
+            <Route path='/dashboard/to-do' element={<Todo today={today} />} />
+            <Route path='/dashboard/projects' element={<Projects today={today} />} />
+            <Route path='/dashboard/schedules' element={<Schedule today={today} />} />
+            <Route path='/dashboard/chat' element={<Chat today={today} />} />
           </Route>
 
           {/* <Route path='explore' element={<Explore />} />

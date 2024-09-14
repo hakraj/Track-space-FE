@@ -23,15 +23,15 @@ const DashboardHome = ({ today }: { today: string }) => {
         <hr className=" border-slate-700 mb-4" />
         <div>
           <div className=" flex items-center justify-between">
-            <h4 className="font-ubuntu text-2xl lg:text-3xl dark: text-slate-200 light:text-slate-800">Your workflow stats:</h4>
-            <button type='button' className=' font-ubuntu my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-white'>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 mr-1 inline">
+            <h4 className="font-ubuntu text-xl lg:text-3xl dark: text-slate-200 light:text-slate-800">Your workflow stats:</h4>
+            <button type='button' className=' font-ubuntu my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-2 md:px-4 text-white max-md:text-sm'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 md:size-5 mr-1 inline">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
               </svg>
               Create project
             </button>
           </div>
-          <div className=" flex items-center gap-4 md:gap-6 m- md:m-4 ">
+          <div className=" flex items-center gap-2 md:gap-6 m-1 md:m-4 max-md:text-sm">
             <div className="tag p-1">Total <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
             <div className="tag p-1">Article <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
             <div className="tag p-1">Code <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
@@ -40,9 +40,9 @@ const DashboardHome = ({ today }: { today: string }) => {
           </div>
         </div>
       </div>
-      <div className="bg-[#ffffff11] content backdrop-filter rounded-2xl px-[5%] py-4 md:py-8 mt-1">
+      <div className="bg-[#ffffff11] content backdrop-filter rounded-2xl px-[5%] py-4 md:py-8 my-1">
         <form className="text-left flex items-center justify-between">
-          <div className="relative w-3/4 md:w-4/5">
+          <div className="relative w-2/3 md:w-4/5">
             <svg className="absolute w-5 h-5 top-2 left-2 text-violet-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
@@ -76,7 +76,7 @@ const DashboardHome = ({ today }: { today: string }) => {
           <p className=" text-slate-500">No item matches your search.</p>
         </div> */}
         <div>
-          <table className="w-full mt-16 text-center table-fixed ">
+          <table className="w-full mt-16 text-center table-fixed max-md:text-sm">
             <thead>
               <tr className="bg-slate-700">
                 <th>Name</th>

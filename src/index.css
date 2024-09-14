@@ -63,6 +63,10 @@ header {
     display: none;
   }
 
+  th, td {
+    padding: 0.25rem;
+  }
+
 }
 
 /* DashboardHome */

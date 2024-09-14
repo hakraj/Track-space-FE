@@ -19,7 +19,7 @@ const AddProject = ({ today }: { today: string }) => {
           <p>Enter in the project title and the type of file use below : </p>
           <div className=" flex items-center justify-between gap-4 md:gap-8 m-4">
             <input
-              className=" block w-full p-2 pl-8 border border-gray-600 rounded-xl text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 bg-transparent "
+              className=" block w-full p-2 border border-gray-600 rounded-xl text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 bg-transparent "
               placeholder="Enter project title"
               id=""
               name=""
@@ -27,7 +27,7 @@ const AddProject = ({ today }: { today: string }) => {
               required
             />
             <input
-              className=" block w-full p-2 pl-8 border border-gray-600 rounded-xl text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 bg-transparent "
+              className=" block w-full p-2 border border-gray-600 rounded-xl text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 bg-transparent "
               placeholder="Enter project type e.g text, code, ..."
               id=""
               name=""
@@ -38,8 +38,8 @@ const AddProject = ({ today }: { today: string }) => {
           </div>
         </div>
       </div>
-      <div className="bg-[#ffffff11] content backdrop-filter rounded-2xl px-[5%] py-4 md:py-8 mt-1">
-        <textarea className=" w-full p-2 pl-8 border border-gray-600 rounded-xl text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 bg-transparent " rows={15} />
+      <div className="bg-[#ffffff11] content backdrop-filter rounded-2xl px-[5%] py-4 md:py-8 my-1">
+        <textarea className=" w-full p-2 pl-8 border border-gray-600 rounded-xl text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 bg-transparent " rows={12} />
         <div className=" flex items-center justify-between mx-[5%] my-4">
           <button type='button' className=' font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Back </button>
           <button type='button' className=' font-ubuntu bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-slate-200'> Submit </button>
