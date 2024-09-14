@@ -29,7 +29,7 @@ const Todo = ({ today }: { today: string }) => {
                 <form>
                   {[1, 2, 3].map((_, key) => {
                     return (
-                      <div className=" flex items-center justify-between my-4">
+                      <div key={key} className=" flex items-center justify-between my-4">
                         <input type="checkbox" name="" id="" />
                         <p className="m-1 md:text-lg text-left w-full ml-4 md:ml-8">Just do it!</p>
                         <input type="hidden" name="title" value="" />
