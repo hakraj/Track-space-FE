@@ -18,7 +18,7 @@ const Todo = ({ today }: { today: string }) => {
           <p>Set your future planned schedule for easy workflow</p>
         </div>
       </div>
-      <div className="bg-[#ffffff11] content backdrop-filter rounded-2xl px-[5%] py-4 md:py-8 my-1 grid grid-cols-3 gap-8">
+      <div className="bg-[#ffffff11] content backdrop-filter rounded-2xl px-[5%] py-4 md:py-8 my-1 grid md:grid-cols-3 gap-8">
         {[1, 2, 3].map((_, key) => {
           return (
             <div key={key} className="bg-slate-700 p-4 md:p-8 rounded-xl text-center  relative">

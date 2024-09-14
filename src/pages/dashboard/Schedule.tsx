@@ -80,7 +80,7 @@ const Schedule = ({ today }: { today: string }) => {
                   <tr key={key} className={key % 2 === 0 ? "" : 'bg-slate-700'}>
                     <td>{val.title}</td>
                     <td>{val.author}</td>
-                    <td>{val.dateCreated}</td>
+                    <td>{val.dateCreated.substring(0, 10)}</td>
                     <td>{val.status}</td>
                   </tr>
                 )
