@@ -1,13 +1,83 @@
 // import Images from "../assets/images/Image";
 
+import axios from "axios";
+import { useContext, useEffect, useState } from "react"
+import { AuthContext } from "../../AuthProvider";
+import { useNavigate } from "react-router-dom";
+
 const DashboardHome = ({ today }: { today: string }) => {
+  const { user } = useContext(AuthContext)
+  const navigate = useNavigate();
+  const [summary, setSummary] = useState({ article: 0, code: 0, text: 0, to_do: 0 })
+  const [projects, setProjects] = useState(Array.of({
+    id: "",
+    name: "",
+    type_format: "",
+    date_modified: new Date(),
+    status: ""
+  }))
+
+  const getSum = (total: any, num: any) => {
+    return total + num;
+  }
+
+  useEffect(() => {
+    async function getData() {
+
+      try {
+        await axios.get(`https://track-space.onrender.com/auth/${user.userID}/project/list`, {
+          headers: {
+            'Authorization': user.token
+          }
+        }).then(response => {
+          const data = response.data?.projects;
+          const projects = data.map((project: { [x: string]: any; }) => {
+            return {
+              id: project["uuid"],
+              name: project["name"],
+              type_format: project["type_format"],
+              date_modified: new Date(project["updated_at"]),
+              status: project["status"]
+            }
+          })
+
+          console.log(data);
+
+          setProjects(projects)
+        });
+
+      } catch (error) {
+        console.error("An unepected error occured:", error)
+      }
+
+      try {
+        await axios.get(`https://track-space.onrender.com/auth/${user.userID}/dashboard`, {
+          headers: {
+            "Authorization": user.token
+          }
+        }).then(response => {
+          const data = response.data?.projectData
+          const type = {
+            article: data.article && Object.values(data?.article).reduce(getSum, 0) || 0,
+            code: data.code && Object.values(data?.code).reduce(getSum, 0) || 0,
+            text: data.text && Object.values(data?.text).reduce(getSum, 0) || 0,
+            to_do: data.to_do && Object.values(data?.to_do).reduce(getSum, 0) || 0,
+          }
+
+          setSummary(type)
+        });
+
+      } catch (error) {
+        console.error("An unepected error occured:", error)
+      }
+
+    }
+
+    getData()
+
+  }, [])
 
 
-  const data = [
-    { title: "Project 1", author: ["Hakeem", "Yusuf"], dateCreated: today, status: "Completed" },
-    { title: "Article 1", author: ["Yusuf"], dateCreated: today, status: "Completed" },
-    { title: "Project 2", author: ["Hakeem"], dateCreated: today, status: "Pending" },
-  ]
   return (
     <>
       <div className="bg-[#ffffff11] backdrop-filter rounded-2xl px-[5%] py-4 md:py-8">
@@ -24,7 +94,7 @@ const DashboardHome = ({ today }: { today: string }) => {
         <div>
           <div className=" flex items-center justify-between">
             <h4 className="font-ubuntu text-xl lg:text-3xl dark: text-slate-200 light:text-slate-800">Your workflow stats:</h4>
-            <button type='button' className=' font-ubuntu my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-2 md:px-4 text-white max-md:text-sm'>
+            <button onClick={() => navigate('/dashboard/add')} type='button' className=' font-ubuntu my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-2 md:px-4 text-white max-md:text-sm'>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 md:size-5 mr-1 inline">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
               </svg>
@@ -32,11 +102,11 @@ const DashboardHome = ({ today }: { today: string }) => {
             </button>
           </div>
           <div className=" flex items-center gap-2 md:gap-6 m-1 md:m-4 max-md:text-sm">
-            <div className="tag p-1">Total <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
-            <div className="tag p-1">Article <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
-            <div className="tag p-1">Code <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
-            <div className="tag p-1">Text <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
-            <div className="tag p-1">To-do <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">0</span></div>
+            <div className="tag p-1">Total <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">{Object.values(summary).reduce(getSum, 0)}</span></div>
+            <div className="tag p-1">Article <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">{summary.article}</span></div>
+            <div className="tag p-1">Code <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">{summary.code}</span></div>
+            <div className="tag p-1">Text <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">{summary.text}</span></div>
+            <div className="tag p-1">To-do <span className="text-xs inline-flex align-middle items-center justify-center size-4 bg-slate-700 rounded-full">{summary.to_do}</span></div>
           </div>
         </div>
       </div>
@@ -80,18 +150,19 @@ const DashboardHome = ({ today }: { today: string }) => {
             <thead>
               <tr className="bg-slate-700">
                 <th>Name</th>
-                <th>Author</th>
+                <th>Type Format</th>
                 <th>Date Created</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
-              {data.map((val, key) => {
+              {projects.map((val, key) => {
                 return (
-                  <tr key={key} className={key % 2 === 0 ? "" : 'bg-slate-700'}>
-                    <td>{val.title}</td>
-                    <td>{val.author}</td>
-                    <td>{val.dateCreated.substring(0, 10)}</td>
+                  <tr onClick={() => navigate(`/dashboard/add?id=${val.id}`)}
+                    key={val.id} className={key % 2 === 0 ? "" : 'bg-slate-700'}>
+                    <td>{val.name}</td>
+                    <td>{val.type_format}</td>
+                    <td>{val.date_modified.toLocaleTimeString('en-GB')}</td>
                     <td>{val.status}</td>
                   </tr>
                 )

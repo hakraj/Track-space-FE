@@ -6,7 +6,7 @@ import { AuthContext } from "../../AuthProvider";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { authenticated, setAuthenticated } = useContext(AuthContext)
+  const { setAuthenticated, setUser } = useContext(AuthContext)
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -20,15 +20,20 @@ const Login = () => {
 
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
     try {
       await axios.post('https://track-space.onrender.com/login', JSON.stringify(formData))
-        .then(response => console.log(response));
+        .then(response => {
+          console.log(response.headers);
+
+          setUser({
+            username: "",
+            userID: response?.data?.data,
+            token: response.headers["authorization"]
+          })
+        })
 
       setAuthenticated(true);
-      console.log(authenticated);
-
       return navigate('/dashboard/home')
     } catch (error) {
       console.error("An unepected error occured:", error)

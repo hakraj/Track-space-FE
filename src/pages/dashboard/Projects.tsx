@@ -1,16 +1,52 @@
+import axios from "axios";
+import { useContext, useEffect, useState } from "react"
+import { AuthContext } from "../../AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 
 const Projects = ({ today }: { today: string }) => {
+  const { user } = useContext(AuthContext)
+  const navigate = useNavigate();
+  const [projects, setProjects] = useState(Array.of({
+    id: "",
+    name: "",
+    type_format: "",
+    date_modified: new Date(),
+    status: ""
+  }))
 
-  const data = [
-    { title: "Project 1", author: ["Hakeem", "Yusuf"], dateCreated: today, status: "Completed" },
-    { title: "Article 1", author: ["Yusuf"], dateCreated: today, status: "Completed" },
-    { title: "Project 2", author: ["Hakeem"], dateCreated: today, status: "Pending" },
-    { title: "Project 1", author: ["Hakeem", "Yusuf"], dateCreated: today, status: "Completed" },
-    { title: "Article 1", author: ["Yusuf"], dateCreated: today, status: "Completed" },
-    { title: "Project 2", author: ["Hakeem"], dateCreated: today, status: "Pending" },
 
-  ]
+  useEffect(() => {
+    async function getData() {
+
+      try {
+        await axios.get(`https://track-space.onrender.com/auth/${user.userID}/project/list`, {
+          headers: {
+            'Authorization': user.token
+          }
+        }).then(response => {
+          const data = response.data?.projects;
+          const projects = data.map((project: { [x: string]: any; }) => {
+            return {
+              id: project["uuid"],
+              name: project["name"],
+              type_format: project["type_format"],
+              date_modified: new Date(project["updated_at"]),
+              status: project["status"]
+            }
+          })
+
+          console.log(data);
+
+          setProjects(projects)
+        });
+
+      } catch (error) {
+        console.error("An unepected error occured:", error)
+      }
+    }
+    getData()
+  }, [])
 
   return (
     <>
@@ -68,18 +104,19 @@ const Projects = ({ today }: { today: string }) => {
             <thead>
               <tr className="bg-violet-400">
                 <th>Name</th>
-                <th>Author</th>
+                <th>Type format</th>
                 <th>Date Created</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
-              {data.map((val, key) => {
+              {projects.map((val, key) => {
                 return (
-                  <tr key={key} className={key % 2 === 0 ? "" : 'bg-slate-700'}>
-                    <td>{val.title}</td>
-                    <td>{val.author}</td>
-                    <td>{val.dateCreated.substring(0, 10)}</td>
+                  <tr onClick={() => navigate(`/dashboard/add?id=${val.id}`)}
+                    key={val.id} className={key % 2 === 0 ? "" : 'bg-slate-700'}>
+                    <td>{val.name}</td>
+                    <td>{val.type_format}</td>
+                    <td>{val.date_modified.toLocaleTimeString('en-GB')}</td>
                     <td>{val.status}</td>
                   </tr>
                 )

@@ -41,8 +41,6 @@ const Signup = () => {
     }
 
     try {
-      console.log(formData);
-
       await axios.post('https://track-space.onrender.com/sign-up', JSON.stringify(formData))
         .then(response => console.log(response))
       return navigate('/auth/login')

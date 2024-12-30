@@ -1,6 +1,36 @@
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const Reset = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    confirm_password: ""
+  })
+
+  const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setFormData({
+      ...formData, [e.target.name]: e.target.value,
+    });
+  }
+
+  const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post('https://track-space.onrender.com/reset-password', JSON.stringify(formData))
+        .then(response => console.log(response.data))
+
+      return navigate('/auth/login')
+    } catch (error) {
+      console.error("An unepected error occured:", error)
+    }
+  }
+
+
   return (
     <>
       <div className="flex flex-col justify-center items-center min-h-screen max-w-xs md:max-w-md mx-auto">
@@ -15,22 +45,33 @@ const Reset = () => {
           <h1 className="text-3xl lg:text-4xl font-ubuntu font-bold my-6 text-slate-200 light:text-slate-800">
             Reset Your Password
           </h1>
-          <form className="text-left">
+          <form className="text-left" onSubmit={handleFormSubmit}>
             <div>
-              <label htmlFor="firstname">
+              <label htmlFor="email">
                 <span className=" font-normal text-sm text-violet-300">Email</span>
                 <input
                   className="mb-3 mt-1 block w-full p-2 border border-gray-300 rounded-lg text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 focus:invalid:border-red-500 focus:invalid:ring-red-500 bg-white"
                   placeholder="Enter your email"
                   id="email"
+                  name="email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={handleInputChange}
                 />
               </label>
-              <label htmlFor="firstname">
+              <label htmlFor="password">
                 <span className=" font-normal text-sm text-violet-300">New password</span>
                 <input
                   className="mb-3 mt-1 block w-full p-2 border border-gray-300 rounded-lg text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 focus:invalid:border-red-500 focus:invalid:ring-red-500 bg-white"
                   placeholder="Enter your password"
                   id="password"
+                  name="password"
+                  type="password"
+                  required
+                  minLength={8}
+                  value={formData.password}
+                  onChange={handleInputChange}
                 />
               </label>
               <label htmlFor="cpassword">
@@ -39,6 +80,13 @@ const Reset = () => {
                   className="mb-3 mt-1 block w-full p-2 border border-gray-300 rounded-lg text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 focus:invalid:border-red-500 focus:invalid:ring-red-500 bg-white"
                   placeholder="Enter your password"
                   id="cpassword"
+                  name="confirm_password"
+                  type="password"
+                  required
+                  autoComplete="off"
+                  minLength={8}
+                  value={formData.confirm_password}
+                  onChange={handleInputChange}
                 />
               </label>
 

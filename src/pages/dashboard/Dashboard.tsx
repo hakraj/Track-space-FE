@@ -34,7 +34,9 @@ const Header = ({ openSidebar }: { openSidebar: () => void }) => {
   )
 }
 
-const Sidebar = ({ openSidebar, openSidebarToggle, setAuthenticated }: { openSidebar: () => void, openSidebarToggle: boolean, setAuthenticated: (newState: boolean) => void }) => {
+const Sidebar = ({ openSidebar, openSidebarToggle, setAuthenticated, setUser }: {
+  openSidebar: () => void, openSidebarToggle: boolean, setAuthenticated: (newState: boolean) => void, setUser: (newState: { username: string, userID: string, token: string }) => void
+}) => {
 
   return (
     <aside id="sidebar" className={`h-screen relative overflow-y-auto dark: text-slate-200 light:text-slate-700 shadow-md ${openSidebarToggle && 'sidebar-res bg-[#000000ff] backdrop-filter w-3/5 '}`}>
@@ -116,7 +118,16 @@ const Sidebar = ({ openSidebar, openSidebarToggle, setAuthenticated }: { openSid
 
       </ul>
       <div className="absolute left-0 bottom-0 w-full">
-        <button onClick={() => setAuthenticated(false)} type='button' className='w-[90%] m-[5%] font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Logout </button>
+        <button onClick={() => {
+          setAuthenticated(false)
+          setUser({
+            username: "",
+            userID: "",
+            token: ""
+          })
+          sessionStorage.removeItem("authenticated");
+          sessionStorage.removeItem("user");
+        }} type='button' className='w-[90%] m-[5%] font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Logout </button>
         <p className="font-ubuntu text-center text-xs text-slate-500 font-light my-4">© 2024 Track-space Inc.</p>
       </div>
     </aside>
@@ -125,15 +136,13 @@ const Sidebar = ({ openSidebar, openSidebarToggle, setAuthenticated }: { openSid
 
 
 const Dashboard = () => {
-  const { authenticated, setAuthenticated } = useContext(AuthContext)
+  const { authenticated, setAuthenticated, setUser } = useContext(AuthContext)
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
 
 
   const openSidebar = () => {
     setOpenSidebarToggle(!openSidebarToggle)
   }
-
-  console.log(authenticated);
 
   if (!authenticated) {
     return <Navigate to={'/auth/login'} replace />
@@ -147,7 +156,7 @@ const Dashboard = () => {
       <div className="light: hidden absolute bottom-auto left-auto right-[-5%] top-0 h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]"></div> */}
       <main className=' max-w-screen-2xl h-screen relative mx-auto z-[100] grid-container'>
         <Header openSidebar={openSidebar} />
-        <Sidebar openSidebarToggle={openSidebarToggle} openSidebar={openSidebar} setAuthenticated={setAuthenticated} />
+        <Sidebar openSidebarToggle={openSidebarToggle} openSidebar={openSidebar} setAuthenticated={setAuthenticated} setUser={setUser} />
         <div id="main" className=" overflow-y-auto h-full flex flex-col mr-2 mb-2 dark: text-slate-300 light:text-slate-700">
           <Outlet />
         </div>

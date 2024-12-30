@@ -1,5 +1,116 @@
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../AuthProvider";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const AddProject = ({ today }: { today: string }) => {
+  const { user } = useContext(AuthContext)
+  const navigate = useNavigate();
+  const [param] = useSearchParams()
+  const [formData, setFormData] = useState({
+    id: "",
+    name: "",
+    content: "",
+    tools_use: "Google docs",
+    type_format: "",
+    status: "pending"
+  })
+
+  const handleInputChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement> = (e) => {
+    setFormData({
+      ...formData, [e.target.name]: e.target.value,
+    });
+  }
+
+  const handleFormSubmit: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
+    e.preventDefault();
+
+    if (formData.id === "") {
+      try {
+        await axios.post(`https://track-space.onrender.com/auth/${user.userID}/project/new`, JSON.stringify(formData), {
+          headers: {
+            "Authorization": user.token
+          }
+        })
+          .then(response => console.log(response));
+
+
+      } catch (error) {
+        console.error("An unepected error occured:", error)
+      }
+    } else {
+      try {
+        await axios.post(`https://track-space.onrender.com/auth/${user.userID}/project/${formData.id}/update`, JSON.stringify(formData), {
+          headers: {
+            "Authorization": user.token
+          }
+        })
+          .then(response => console.log(response));
+
+
+      } catch (error) {
+        console.error("An unepected error occured:", error)
+      }
+    }
+
+    setFormData({
+      id: "",
+      name: "",
+      content: "",
+      tools_use: "Google docs",
+      type_format: "",
+      status: "pending"
+    })
+
+    navigate('/dashboard/home')
+  }
+
+  const getData = async () => {
+    try {
+      await axios.get(`https://track-space.onrender.com/auth/${user.userID}/project/list`, {
+        headers: {
+          'Authorization': user.token
+        }
+      }).then(response => {
+        const data = response.data?.projects;
+        const project = data.filter((project: { uuid: string | null; }) => project.uuid === param.get('id'))
+
+        setFormData({
+          id: project[0].uuid,
+          name: project[0].name,
+          content: project[0].content,
+          tools_use: "Google docs",
+          type_format: project[0].type_format,
+          status: "pending"
+        })
+      });
+
+
+    } catch (error) {
+      console.error("An unepected error occured:", error)
+    }
+
+  }
+
+  const deleteProject = async (id: string) => {
+    try {
+      await axios.delete(`https://track-space.onrender.com/auth/${user.userID}/project/${id}/delete`, {
+        headers: {
+          "Authorization": user.token
+        }
+      })
+        .then(response => console.log(response));
+
+    } catch (error) {
+      console.error("An unepected error occured:", error)
+    }
+  }
+
+
+
+  useEffect(() => {
+    getData()
+  }, [])
 
   return (
     <>
@@ -22,27 +133,45 @@ const AddProject = ({ today }: { today: string }) => {
               className=" block w-full p-2 border border-gray-600 rounded-xl text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 bg-transparent "
               placeholder="Enter project title"
               id=""
-              name=""
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
               type="text"
               required
             />
-            <input
+            <select
               className=" block w-full p-2 border border-gray-600 rounded-xl text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 bg-transparent "
-              placeholder="Enter project type e.g text, code, ..."
               id=""
-              name=""
-              type="text"
+              name="type_format"
+              value={formData.type_format}
+              onChange={handleInputChange}
               required
-            />
+            >
+              <option value="" disabled>Select an option</option>
+              <option value="article">Article</option>
+              <option value="text">Text</option>
+              <option value="code">Code</option>
+              <option value="article">Article</option>
+            </select>
 
           </div>
         </div>
       </div>
       <div className="bg-[#ffffff11] content backdrop-filter rounded-2xl px-[5%] py-4 md:py-8 my-1">
-        <textarea className=" w-full p-2 pl-8 border border-gray-600 rounded-xl text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 bg-transparent " rows={12} />
+        <textarea
+          className=" w-full p-2 pl-8 border border-gray-600 rounded-xl text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-1 focus:ring-violet-400 bg-transparent "
+          rows={12}
+          name="content"
+          value={formData.content}
+          onChange={handleInputChange}
+          required
+        />
         <div className=" flex items-center justify-between mx-[5%] my-4">
-          <button type='button' className=' font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Back </button>
-          <button type='button' className=' font-ubuntu bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-slate-200'> Submit </button>
+          <button onClick={() => {
+            deleteProject(formData.id)
+            navigate('/dashboard/home')
+          }} type='button' className=' font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-violet-400'> Delete </button>
+          <button onClick={handleFormSubmit} type='submit' className=' font-ubuntu bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-sm text-slate-200'> Submit </button>
         </div>
       </div>
     </>

@@ -15,8 +15,6 @@ import AddProject from './pages/dashboard/AddProject';
 import { AuthProvider } from './AuthProvider';
 import Todo from './pages/dashboard/Todo';
 import Projects from './pages/dashboard/Projects';
-import Schedule from './pages/dashboard/Schedule';
-import Chat from './pages/dashboard/Chat';
 
 function App() {
   const today = new Date().toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
@@ -43,8 +41,8 @@ function App() {
             <Route path='/dashboard/add' element={<AddProject today={today} />} />
             <Route path='/dashboard/to-do' element={<Todo today={today} />} />
             <Route path='/dashboard/projects' element={<Projects today={today} />} />
-            <Route path='/dashboard/schedules' element={<Schedule today={today} />} />
-            <Route path='/dashboard/chat' element={<Chat today={today} />} />
+            {/* <Route path='/dashboard/schedules' element={<Schedule today={today} />} />
+            <Route path='/dashboard/chat' element={<Chat today={today} />} /> */}
           </Route>
 
           {/* <Route path='explore' element={<Explore />} />
