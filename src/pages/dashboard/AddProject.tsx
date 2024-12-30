@@ -151,7 +151,6 @@ const AddProject = ({ today }: { today: string }) => {
               <option value="article">Article</option>
               <option value="text">Text</option>
               <option value="code">Code</option>
-              <option value="article">Article</option>
             </select>
 
           </div>

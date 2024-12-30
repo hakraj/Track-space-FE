@@ -24,46 +24,6 @@ const Todo = ({ today }: { today: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [minTime, setMinTime] = useState('');
 
-  useEffect(() => {
-    const now = new Date();
-    const fhours = String(now.getHours()).padStart(2, '0');
-    const fminutes = String(now.getMinutes()).padStart(2, '0');
-    setMinTime(`${fhours}:${fminutes}`);
-
-    async function getData() {
-      try {
-        await axios.get(`https://track-space.onrender.com/auth/${user.userID}/todo/all`, {
-          headers: {
-            "Authorization": user.token
-          }
-        }).then(response => {
-          const data = response.data?.todos;
-          const todos = data.map((todo: { [x: string]: any; }) => {
-            return {
-              id: todo["uuid"],
-              task: todo["task"],
-              schedule_date: todo["schedule_date"],
-              start_time: todo["start_time"],
-              end_time: todo["end_time"],
-              status: todo["status"]
-            }
-          })
-
-
-          console.log(todos);
-          setTodos(todos)
-        });
-
-      } catch (error) {
-        console.error("An unepected error occured:", error)
-      }
-
-    }
-
-    getData()
-  }, [isModalOpen])
-
-
   const handleTaskChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setNewTask({
       ...newTask, [e.target.name]: e.target.value,
@@ -124,6 +84,45 @@ const Todo = ({ today }: { today: string }) => {
       console.error("An unepected error occured:", error)
     }
   }
+  useEffect(() => {
+    const now = new Date();
+    const fhours = String(now.getHours()).padStart(2, '0');
+    const fminutes = String(now.getMinutes()).padStart(2, '0');
+    setMinTime(`${fhours}:${fminutes}`);
+
+    async function getData() {
+      try {
+        await axios.get(`https://track-space.onrender.com/auth/${user.userID}/todo/all`, {
+          headers: {
+            "Authorization": user.token
+          }
+        }).then(response => {
+          const data = response.data?.todos;
+          const todos = data.map((todo: { [x: string]: any; }) => {
+            return {
+              id: todo["uuid"],
+              task: todo["task"],
+              schedule_date: todo["schedule_date"],
+              start_time: todo["start_time"],
+              end_time: todo["end_time"],
+              status: todo["status"]
+            }
+          })
+
+
+          console.log(todos);
+          setTodos(todos)
+        });
+
+      } catch (error) {
+        console.error("An unepected error occured:", error)
+      }
+
+    }
+
+    getData()
+  }, [isModalOpen, deleteTask])
+
 
   return (
     <>
