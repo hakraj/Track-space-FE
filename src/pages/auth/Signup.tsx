@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const navigate = useNavigate();
   const [agreeTerms, setAgreeTerms] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -32,22 +33,34 @@ const Signup = () => {
 
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
 
     if (!agreeTerms) {
       setError({
         ...error, ["terms"]: true
       })
-      return console.error("user yet to agree to terms and condition:")
+      return alert("user yet to agree to terms and condition:")
     }
 
     try {
       await axios.post('https://track-space.onrender.com/sign-up', JSON.stringify(formData))
         .then(response => console.log(response))
       return navigate('/auth/login')
-    } catch (error) {
+    } catch (error: any) {
       console.error("An unepected error occured:", error)
+      // Handle the error
+      if (error.response) {
+        // Server responded with a status outside 2xx
+        alert(`Error: ${error.response.data.message || error.response.statusText}`);
+      } else if (error.request) {
+        // No response was received
+        alert('Error: No response received from the server.');
+      } else {
+        // Some other error (setting up the request, etc.)
+        alert(`Error: ${error.message}`);
+      }
     }
-
+    setIsLoading(false)
 
   }
 
@@ -167,7 +180,7 @@ const Signup = () => {
               type="submit"
               className=" font-ubuntu w-full my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-lg text-white"
             >
-              Signup
+              {isLoading ? "..." : "Signup"}
             </button>
           </form>
 

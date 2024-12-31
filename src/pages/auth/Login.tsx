@@ -7,6 +7,7 @@ import { AuthContext } from "../../AuthProvider";
 const Login = () => {
   const navigate = useNavigate();
   const { setAuthenticated, setUser } = useContext(AuthContext)
+  const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -20,6 +21,7 @@ const Login = () => {
 
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
 
     try {
       await axios.post('https://track-space.onrender.com/login', JSON.stringify(formData))
@@ -34,10 +36,23 @@ const Login = () => {
         })
 
       setAuthenticated(true);
+
       return navigate('/dashboard/home')
-    } catch (error) {
+    } catch (error: any) {
       console.error("An unepected error occured:", error)
+      // Handle the error
+      if (error.response) {
+        // Server responded with a status outside 2xx
+        alert(`Error: ${error.response.data.message || error.response.statusText}`);
+      } else if (error.request) {
+        // No response was received
+        alert('Error: No response received from the server.');
+      } else {
+        // Some other error (setting up the request, etc.)
+        alert(`Error: ${error.message}`);
+      }
     }
+    setIsLoading(false)
 
 
   }
@@ -93,7 +108,7 @@ const Login = () => {
               type="submit"
               className=" font-ubuntu w-full my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-lg text-white"
             >
-              Login
+              {isLoading ? "..." : "Login"}
             </button>
           </form>
 

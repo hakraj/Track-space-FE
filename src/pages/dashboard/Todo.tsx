@@ -78,7 +78,10 @@ const Todo = ({ today }: { today: string }) => {
           "Authorization": user.token
         }
       })
-        .then(response => console.log(response));
+        .then(() => {
+          const Ntodos = todos.filter((todo) => todo.id !== id)
+          setTodos(Ntodos)
+        });
 
     } catch (error) {
       console.error("An unepected error occured:", error)

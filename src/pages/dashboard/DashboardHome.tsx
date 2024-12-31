@@ -13,7 +13,7 @@ const DashboardHome = ({ today }: { today: string }) => {
     id: "",
     name: "",
     type_format: "",
-    date_modified: new Date(),
+    date_modified: "" as unknown as Date,
     status: ""
   }))
 

@@ -11,7 +11,7 @@ const Header = ({ openSidebar }: { openSidebar: () => void }) => {
         </svg>
       </div>
       <div className="relative">
-        <input className="max-md:w-[100px] py-1 pl-4 pr-8 rounded-2xl font-light text-sm bg-transparent border border-violet-400 focus:outline-violet-500" type="text" name="search" id="search" placeholder="search keywords" />
+        <input className=" max-sm:w-[112px] py-1 pl-4 pr-9 rounded-2xl font-light text-sm bg-transparent border border-violet-400 focus:outline-violet-500" type="text" name="search" id="search" placeholder="search keywords" />
         <button className="border-0 bg-transparent w-0 h-0" type="submit">
           <svg className="absolute w-5 h-5 top-1 right-4 text-violet-500 active:text-violet-300 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -42,9 +42,9 @@ const Sidebar = ({ openSidebar, openSidebarToggle, setAuthenticated, setUser }: 
     <aside id="sidebar" className={`h-screen relative overflow-y-auto dark: text-slate-200 light:text-slate-700 shadow-md ${openSidebarToggle && 'sidebar-res bg-[#000000ff] backdrop-filter w-3/5 '}`}>
       <div className="p-[5%] flex items-center justify-between">
         <div className=" flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className=" text-violet-500 size-6 md:size-8 mr-1">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className=" text-violet-500 size-6 md:size-8 mr-1">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
           </svg>
           <p className='logo text-lg md:text-xl font-bold font-mono'>Track-space</p>
         </div>
@@ -95,7 +95,7 @@ const Sidebar = ({ openSidebar, openSidebarToggle, setAuthenticated, setUser }: 
             Projects
           </li>
         </Link>
-        <Link onClick={() => {
+        {/* <Link onClick={() => {
           if (openSidebarToggle) openSidebar()
         }} to="/dashboard/schedules">
           <li className="item ">
@@ -114,7 +114,7 @@ const Sidebar = ({ openSidebar, openSidebarToggle, setAuthenticated, setUser }: 
             </svg>
             Chatroom
           </li>
-        </Link>
+        </Link> */}
 
       </ul>
       <div className="absolute left-0 bottom-0 w-full">
