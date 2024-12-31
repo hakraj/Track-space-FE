@@ -198,7 +198,17 @@ const Todo = ({ today }: { today: string }) => {
               </div>
               <div>
                 <button
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={() => {
+                    setNewTask({
+                      id: "",
+                      task: "",
+                      schedule_date: "",
+                      start_time: "",
+                      end_time: "",
+                      status: "pending"
+                    })
+                    setIsModalOpen(false)
+                  }}
                   type='button' className=' m-4 font-ubuntu bg-transparent border border-violet-400 hover:text-slate-200 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-violet-400'>
                   Cancel
                 </button>

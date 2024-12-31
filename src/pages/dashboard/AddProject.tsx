@@ -126,7 +126,7 @@ const AddProject = ({ today }: { today: string }) => {
         </div>
         <hr className=" border-slate-700 mb-4" />
         <div>
-          <h4 className="font-ubuntu text-2xl lg:text-3xl dark: text-slate-200 light:text-slate-800">Create a new project</h4>
+          <h4 className="font-ubuntu text-2xl lg:text-3xl dark: text-slate-200 light:text-slate-800">{param.has('id') ? "Create a new project" : "Update your project"}</h4>
           <p>Enter in the project title and the type of file use below : </p>
           <div className=" flex items-center justify-between gap-4 md:gap-8 m-4">
             <input
