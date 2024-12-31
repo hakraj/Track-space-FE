@@ -51,7 +51,7 @@ const Signup = () => {
       // Handle the error
       if (error.response) {
         // Server responded with a status outside 2xx
-        alert(`Error: ${error.response.data.message || error.response.statusText}`);
+        alert(`Error: ${error.response.data.error || error.response.statusText}`);
       } else if (error.request) {
         // No response was received
         alert('Error: No response received from the server.');
@@ -180,7 +180,10 @@ const Signup = () => {
               type="submit"
               className=" font-ubuntu w-full my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-lg text-white"
             >
-              {isLoading ? "..." : "Signup"}
+              {isLoading ?
+                <div className="w-5 h-5 rounded-full animate-spin border-2 border-solid border-white border-t-transparent shadow-md mx-auto my-1"></div>
+
+                : "Signup"}
             </button>
           </form>
 

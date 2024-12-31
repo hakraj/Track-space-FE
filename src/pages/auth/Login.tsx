@@ -108,7 +108,9 @@ const Login = () => {
               type="submit"
               className=" font-ubuntu w-full my-4 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-lg text-white"
             >
-              {isLoading ? "..." : "Login"}
+              {isLoading ?
+                <div className="w-5 h-5 rounded-full animate-spin border-2 border-solid border-white border-t-transparent shadow-md mx-auto my-1"></div>
+                : "Login"}
             </button>
           </form>
 

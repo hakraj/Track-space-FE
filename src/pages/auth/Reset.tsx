@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Reset = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,6 +20,7 @@ const Reset = () => {
 
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
 
     try {
       await axios.post('https://track-space.onrender.com/reset-password', JSON.stringify(formData))
@@ -28,6 +30,8 @@ const Reset = () => {
     } catch (error) {
       console.error("An unepected error occured:", error)
     }
+
+    setIsLoading(false)
   }
 
 
@@ -95,7 +99,9 @@ const Reset = () => {
               type="submit"
               className=" font-ubuntu w-full my-6 bg-violet-500 hover:bg-gradient-to-tr hover:from-violet-300 hover:to-violet-400 rounded-lg py-2 px-4 text-lg text-white"
             >
-              Reset password
+              {isLoading ? <div className="w-5 h-5 rounded-full animate-spin border-2 border-solid border-white border-t-transparent shadow-md mx-auto my-1"></div>
+                :
+                "Reset password"}
             </button>
           </form>
         </div>
